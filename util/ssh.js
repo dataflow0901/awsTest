@@ -4,7 +4,7 @@ var v_host = '112.217.209.162';
 var awshost = "ec2-54-158-18-34.compute-1.amazonaws.com";
 
 
-const privateKey = require('fs').readFileSync(path.join(__dirname, '../blockchain.pem'))
+const privateKey = require('fs').readFileSync(path.join(__dirname, '../blockchain.pem')).toString();
 const options = {
     user: 'dataflow1',
     host: v_host, 
