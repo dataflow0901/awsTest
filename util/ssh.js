@@ -11,7 +11,8 @@ const options = {
 const awsBlockchain = {
     user: 'ec2-user',
     host: awshost,
-    privateKey: '~/.ssh/blockchain.pem'
+    privateKey: '~/.ssh/blockchain.pem',
+    interactiveAuth: true
 
 }
 
