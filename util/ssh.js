@@ -10,7 +10,9 @@ const options = {
 
 const awsBlockchain = {
     user: 'ec2-user',
-    host: awshost
+    host: awshost,
+    privateKey: '~/.ssh/blockchain.pem'
+
 }
 
 module.exports.ls = () => { 
