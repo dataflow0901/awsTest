@@ -16,7 +16,7 @@ const awsBlockchain = {
 }
 
 module.exports.ls = () => { 
-    const stream = exec('cd bilido\npwd', awsBlockchain)
+    const stream = exec('pwd', awsBlockchain)
     .pipe(process.stdout, function (err, data) { 
       console.log("err => ", err, "data =>", data);
         if ( err ) {
