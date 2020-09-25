@@ -28,11 +28,11 @@ router.post("/createAccount", (req, res) => {
   ssh2.createAccount(req.body);
   res.send("end");
 })
-router.get("/queryAccount", (req, res) => {
+router.post("/queryAccount", (req, res) => {
   ssh2.queryAccount(req.body);
   res.send("end");
 })
-router.get("/transfer", (req, res) => {
+router.post("/transfer", (req, res) => {
   ssh2.transfer(req.body);
   res.send("end");
 })
