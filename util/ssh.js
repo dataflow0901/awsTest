@@ -16,6 +16,7 @@ const options = {
 const awsBlockchain = {
     user: 'ec2-user',
     host: awshost,
+    password: '',
     privateKey: privateKey,
     interactiveAuth: true,
     readyTimeout: 30000
@@ -24,7 +25,7 @@ const awsBlockchain = {
 
 module.exports.ls = () => { 
     try{
-        const stream = exec('pwd', awsBlockchain)
+        const stream = exec('-pwd', options)
         .pipe(process.stdout, function (err, data) { 
           console.log("err => ", err, "data =>", data);
             if ( err ) {
