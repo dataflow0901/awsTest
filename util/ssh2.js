@@ -140,9 +140,15 @@ const executeCommand = (command, options) => {
     
             stream.on("data", (data)=>{
                 console.log("STDOUT: ", data.toString());
+                endConn();
             }).stderr.on("data", (data)=>{
                 console.log("STDERR: ", data.toString());
+                endConn();
             })
+
+            const endConn = () => {
+                conn.end();
+            }
         })
     }).connect(options);
 
