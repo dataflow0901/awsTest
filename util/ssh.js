@@ -4,7 +4,7 @@ var v_host = '112.217.209.162';
 var awshost = "ec2-54-158-18-34.compute-1.amazonaws.com";
 
 
-const privateKey = require('fs').readFileSync(path.join('/','home', 'dataflow1', '.ssh', 'blockchain'))
+const privateKey = require('fs').readFileSync(path.join(__dirname, '../blockchain.pem'))
 const options = {
     user: 'dataflow1',
     host: v_host, 
@@ -14,7 +14,7 @@ const options = {
 const awsBlockchain = {
     user: 'ec2-user',
     host: awshost,
-    privateKey: privatekey,
+    privateKey: privateKey,
     interactiveAuth: true
 
 }
