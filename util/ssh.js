@@ -24,18 +24,14 @@ const awsBlockchain = {
 }
 
 module.exports.ls = () => { 
-    try{
-        const stream = exec('-pwd', awsBlockchain)
-        .pipe(process.stdout, function (err, data) { 
-          console.log("err => ", err, "data =>", data);
-            if ( err ) {
-                console.log(v_host); console.log(err); 
-            }
-        })
-    }catch(err){
-        console.log("error while function ls >>", err);
-        
-    }
+    const stream = exec('pwd', awsBlockchain)
+    .pipe(process.stdout, function (err, data) { 
+        console.log("err => ", err, "data =>", data);
+        if ( err ) {
+            console.log(v_host); console.log(err); 
+        }
+    })
+ 
     
 
 }
