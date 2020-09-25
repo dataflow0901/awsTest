@@ -17,7 +17,8 @@ const awsBlockchain = {
     user: 'ec2-user',
     host: awshost,
     privateKey: privateKey,
-    interactiveAuth: true
+    interactiveAuth: true,
+    readyTimeout: 30000
 
 }
 
