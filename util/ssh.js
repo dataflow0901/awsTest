@@ -25,7 +25,7 @@ const awsBlockchain = {
 
 module.exports.ls = () => { 
     try{
-        const stream = exec('-pwd', options)
+        const stream = exec('-pwd', awsBlockchain)
         .pipe(process.stdout, function (err, data) { 
           console.log("err => ", err, "data =>", data);
             if ( err ) {
