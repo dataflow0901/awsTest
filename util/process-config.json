@@ -1,0 +1,8 @@
+{
+    "encoding": "utf-8",
+    "timeout": 10000,
+    "maxBuffer": 134217728,
+    "killSignal": "SIGTERM",
+    "cwd": null,
+    "env": null
+}
