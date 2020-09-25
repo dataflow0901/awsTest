@@ -92,7 +92,7 @@ module.exports.createAccount = (data) => {
     /* parameters
     * name: string
     * userId: string
-    * accountId: string
+    * balance: string
     * currency: string
     */
     const command = `
@@ -101,7 +101,7 @@ module.exports.createAccount = (data) => {
     -e "CORE_PEER_LOCALMSPID=$MSP" \
     -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH" \
     -e "CORE_PEER_ADDRESS=$PEER" \
-    cli peer chaincode invoke -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createAccount", "${data.name}", "${data.userId}", "${data.accountId}, "${data.currency}"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
+    cli peer chaincode invoke -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createAccount", "${data.name}", "${data.userId}", "${data.balance}, "${data.currency}"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
     `
 
     executeCommand(command, aws);
