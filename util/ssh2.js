@@ -70,3 +70,88 @@ module.exports.initAws = () => {
         })
     }).connect(aws);
 }
+
+
+module.exports.queryAccount = (data) => {
+    /* parameters
+    * userId: string
+    */
+   const command = `
+   docker exec -e "CORE_PEER_TLS_ENABLED=true" \
+   -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/home/managedblockchain-tls-chain.pem" \
+   -e "CORE_PEER_LOCALMSPID=$MSP" \
+   -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH" \
+   -e "CORE_PEER_ADDRESS=$PEER" \
+   cli peer chaincode invoke -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["queryAccount", "${data.userId}"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
+   `
+
+    executeCommand(command, aws);
+}
+
+module.exports.createAccount = (data) => {
+    /* parameters
+    * name: string
+    * userId: string
+    * accountId: string
+    * currency: string
+    */
+    const command = `
+    docker exec -e "CORE_PEER_TLS_ENABLED=true" \
+    -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/home/managedblockchain-tls-chain.pem" \
+    -e "CORE_PEER_LOCALMSPID=$MSP" \
+    -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH" \
+    -e "CORE_PEER_ADDRESS=$PEER" \
+    cli peer chaincode invoke -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createAccount", "${data.name}", "${data.userId}", "${data.accountId}, "${data.currency}"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
+    `
+
+    executeCommand(command, aws);
+}
+
+module.exports.transfer = (data) => {
+    /* parameters
+    * fromId: string
+    * chaincode: string
+    * toId: string
+    * amount: string
+    */
+    const command = `
+    docker exec -e "CORE_PEER_TLS_ENABLED=true" \
+    -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/home/managedblockchain-tls-chain.pem" \
+    -e "CORE_PEER_LOCALMSPID=$MSP" \
+    -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH" \
+    -e "CORE_PEER_ADDRESS=$PEER" \
+    cli peer chaincode invoke -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createAccount", "${data.name}", "${data.userId}", "${data.accountId}, "${data.currency}"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
+    `
+
+    executeCommand(command, aws);
+}
+
+const executeCommand = (command, options) => {
+    const conn = new Client();
+
+    conn.on("ready", () => {
+        console.log("Client:: Ready");
+        conn.exec(command, (err, stream) => {
+            if(err) throw err;
+            stream.on('close', function(code, signal){
+                console.log("Stream:: close:: code ", code, ' signal:', signal);
+                conn.end();
+            })
+    
+            stream.on("data", (data)=>{
+                console.log("STDOUT: ", data.toString());
+            }).stderr.on("data", (data)=>{
+                console.log("STDERR: ", data.toString());
+            })
+        })
+    }).connect(options);
+
+    conn.on('end', function() {
+        console.log('end')
+    })
+
+    conn.on("error", (err) => {
+        console.log("error occured", err);
+    });
+
+}
