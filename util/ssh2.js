@@ -10,7 +10,8 @@ const ubuntu = {
     readyTimeout: 99999
 }
 
-const privateKey = require('fs').readFileSync(path.join(__dirname, '../blockchain.pem')).toString();
+const pemFilePath = path.join('home','ec2-user/','admin-msp/cacerts/ca-m-chmnkw3harczxgx4ozovlenqo4-n-ueetjyriqffztk5vw5ymgel4ae-managedblockchain-us-east-1-amazonaws-com-30002.pem');
+const privateKey = require('fs').readFileSync(path.join('/home', 'dataflow1','.ssh/blockchain.pem')).toString();
 
 const aws = {
     host: 'ec2-54-158-18-34.compute-1.amazonaws.com',
@@ -52,10 +53,12 @@ module.exports.initUbuntu = () => {
 
 module.exports.initAws = () => {
     const conn = new Client();
-
+    const query1 = "~/environment/bank-transfer-blockchain-reinvent2019-workshop/setup/setup_environment.sh";
+    const query2 = "source ~/.bash_profile";
+    const query3 = "cd ~/environment & ./bank-transfer-blockchain-reinvent2019-workshop/setup/setup_fabric_environment.py"; 
     conn.on("ready", () => {
         console.log("Client:: Ready");
-        conn.exec("pwd", (err, stream) => {
+        conn.exec(query3, (err, stream) => {
             if(err) throw err;
             stream.on('close', function(code, signal){
                 console.log("Stream:: close:: code ", code, ' signal:', signal);
@@ -78,11 +81,11 @@ module.exports.queryAccount = (data) => {
     */
    const command = `
    docker exec -e "CORE_PEER_TLS_ENABLED=true" \
-   -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/home/managedblockchain-tls-chain.pem" \
+   -e "CORE_PEER_TLS_ROOTCERT_FILE=${pemFilePath}" \
    -e "CORE_PEER_LOCALMSPID=$MSP" \
    -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH" \
    -e "CORE_PEER_ADDRESS=$PEER" \
-   cli peer chaincode invoke -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["queryAccount", "${data.userId}"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
+   cli peer chaincode invoke -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["queryAccount", "${data.userId}"]}' --cafile ${pemFilePath} --tls
    `
 
     executeCommand(command, aws);
