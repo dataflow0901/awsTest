@@ -85,7 +85,7 @@ module.exports.queryAccount = (data) => {
         -e "CORE_PEER_LOCALMSPID=$MSP" \
         -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH"  \
         -e "CORE_PEER_ADDRESS=$PEER" \
-        cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createAccount", "Park Jinguk", "0000002", "500000", "USD"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls  
+        cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["queryAccount", "Jonathan Shapiro-Ward"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls  
     `;
 
     executeCommand(command, aws);
@@ -99,14 +99,14 @@ module.exports.createAccount = (data) => {
     * currency: string
     */
     const command = `
+    source ~/.bash_profile;
     docker exec -e "CORE_PEER_TLS_ENABLED=true" \
-    -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/home/managedblockchain-tls-chain.pem" \
+    -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/home/managedblockchain-tls-chain.pem"  \
     -e "CORE_PEER_LOCALMSPID=$MSP" \
-    -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH" \
+    -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH"  \
     -e "CORE_PEER_ADDRESS=$PEER" \
-    cli peer chaincode invoke -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createAccount", "${data.name}", "${data.userId}", "${data.balance}, "${data.currency}"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
-    `
-
+    cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createAccount", "Park Jinguk", "0000002", "500000", "USD"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls  
+    `;c
     executeCommand(command, aws);
 }
 
