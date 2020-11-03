@@ -10,6 +10,8 @@ const ubuntu = {
     readyTimeout: 99999
 }
 
+const privateKey = require('fs').readFileSync(path.join('/home', 'dataflow1','.ssh/blockchain.pem')).toString();
+
 const aws = {
     host: 'ec2-54-158-18-34.compute-1.amazonaws.com',
     port: 22,
