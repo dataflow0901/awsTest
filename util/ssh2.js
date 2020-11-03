@@ -85,7 +85,7 @@ module.exports.queryAccount = (data) => {
         -e "CORE_PEER_LOCALMSPID=$MSP" \
         -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH"  \
         -e "CORE_PEER_ADDRESS=$PEER" \
-        cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createAccount", "Jonathan Shapiro-Ward", "0000001", "500000", "USD"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls  
+        cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createAccount", "Park Jinguk", "0000002", "500000", "USD"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls  
     `;
 
     executeCommand(command, aws);
