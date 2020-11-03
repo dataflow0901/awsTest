@@ -10,7 +10,9 @@ const ubuntu = {
     readyTimeout: 99999
 }
 
-const pemFilePath = path.join('home','ec2-user/','admin-msp/cacerts/ca-m-chmnkw3harczxgx4ozovlenqo4-n-ueetjyriqffztk5vw5ymgel4ae-managedblockchain-us-east-1-amazonaws-com-30002.pem');
+// const pemFilePath = path.join('/home','ec2-user/','admin-msp/cacerts/ca-m-chmnkw3harczxgx4ozovlenqo4-n-ueetjyriqffztk5vw5ymgel4ae-managedblockchain-us-east-1-amazonaws-com-30002.pem');
+const pemFilePath = "/home/ec2-user/managedblockchain-tls-chain.pem";
+
 const privateKey = require('fs').readFileSync(path.join('/home', 'dataflow1','.ssh/blockchain.pem')).toString();
 
 const aws = {
@@ -80,13 +82,13 @@ module.exports.queryAccount = (data) => {
     * userId: string
     */
    const command = `
-   docker exec -e "CORE_PEER_TLS_ENABLED=true" \
-   -e "CORE_PEER_TLS_ROOTCERT_FILE=${pemFilePath}" \
-   -e "CORE_PEER_LOCALMSPID=$MSP" \
-   -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH" \
-   -e "CORE_PEER_ADDRESS=$PEER" \
-   cli peer chaincode invoke -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["queryAccount", "${data.userId}"]}' --cafile ${pemFilePath} --tls
-   `
+        docker exec -e "CORE_PEER_TLS_ENABLED=true" \
+        -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/home/managedblockchain-tls-chain.pem"  \
+        -e "CORE_PEER_LOCALMSPID=$MSP" \
+        -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH"  \
+        -e "CORE_PEER_ADDRESS=$PEER" \
+        cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createAccount", "Jonathan Shapiro-Ward", "0000001", "500000", "USD"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls  
+    `;
 
     executeCommand(command, aws);
 }
