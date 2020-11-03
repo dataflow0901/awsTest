@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 
-const exec = require("../util/ssh");
 const ssh2 = require('../util/ssh2');
 
   /* GET home page. */

@@ -10,11 +10,6 @@ const ubuntu = {
     readyTimeout: 99999
 }
 
-// const pemFilePath = path.join('/home','ec2-user/','admin-msp/cacerts/ca-m-chmnkw3harczxgx4ozovlenqo4-n-ueetjyriqffztk5vw5ymgel4ae-managedblockchain-us-east-1-amazonaws-com-30002.pem');
-const pemFilePath = "/home/ec2-user/managedblockchain-tls-chain.pem";
-
-const privateKey = require('fs').readFileSync(path.join('/home', 'dataflow1','.ssh/blockchain.pem')).toString();
-
 const aws = {
     host: 'ec2-54-158-18-34.compute-1.amazonaws.com',
     port: 22,
