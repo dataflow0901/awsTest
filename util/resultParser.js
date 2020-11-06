@@ -22,5 +22,5 @@ const getJsonValue = (payload, name) => {
     let searchStrLength = searchStr.length;
     let searchStrIndex = payload.indexOf(searchStr);
     
-    return payload.substring(nameIndex, payload.indexOf(quotation, searchStrIndex + searchStrLength + 2));
+    return payload.substring(searchStrIndex, payload.indexOf(quotation, searchStrIndex + searchStrLength + 2));
 }
