@@ -190,10 +190,10 @@ const executeCommand = (command, options) => {
             stream.on("data", (data)=>{
                 console.log("STDOUT: ", data.toString());
                 endConn();
-            }).stderr.on("data", (data)=>{
+            }).stderr.on("data", async (data)=>{
                 console.log("STDERR: ", data.toString());
                 if(data.includes("payload:\"")){
-                    const payload = parser.getPayload(data.toString());
+                    const payload = await parser.getPayload(data.toString());
                     console.log("returned payload: ", payload);
                 }
             })

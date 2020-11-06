@@ -1,6 +1,7 @@
 const parser = module.exports;
 
 parser.getPayload = (str) => {
+    console.log("payload on getPayload method => ", str);
     if(str.includes("payload:\"")){
         const payload = str.substring(str.indexOf('payload'))
         return includesPayload(payload)
