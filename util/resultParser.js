@@ -40,7 +40,8 @@ const getJsonValue = (payload, name) => {
     const sqidx = payload.indexOf(quotation, searchStrIndex + searchStrLength) + quotation.length;
     const eqidx = payload.indexOf(quotation, sqidx);
     console.log(`getJsonValue: 
-        payload -> ${payload}, searchStr -> ${searchStr}, quotation -> ${quotation}, searchStrLength -> ${searchStrLength}\n
+        payload -> ${payload}, searchStr -> ${searchStr}, quotation -> ${quotation}
+        searchStrLength -> ${searchStrLength}, searchStrIndex -> ${searchStrIndex}
         sqidx -> ${sqidx}, eqidx -> ${eqidx}`)
     
     return payload.substring(sqidx, eqidx);
