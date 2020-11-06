@@ -17,9 +17,4 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-process.on("SIGUSR2", () => {
-    gracefulShutdown(function () {
-        process.kill(process.pid, "SIGUSR2");
-    });
-})
 module.exports = app;

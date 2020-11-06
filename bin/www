@@ -77,6 +77,14 @@ function onError(error) {
   }
 }
 
+
+process.on("SIGUSR2", () => {
+  server.close(function () {
+      process.kill(process.pid, "SIGUSR2");
+  });
+})
+
+
 /**
  * Event listener for HTTP server "listening" event.
  */
