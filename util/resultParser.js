@@ -10,9 +10,8 @@ parser.getPayload = (str) => {
 const includesPayload = (payload) => {
     let parsedPayload = {};
 
-    if( payload.includes(nameSearchStr)){
-        parsedPayload.name = getJsonValue("name");
-    }
+    parsedPayload.name = getJsonValue("name");
+
 }
 
 const getJsonValue = (name) => {
