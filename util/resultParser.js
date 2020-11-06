@@ -10,11 +10,11 @@ parser.getPayload = (str) => {
 const includesPayload = (payload) => {
     let parsedPayload = {};
 
-    parsedPayload.name = getJsonValue("name");
+    parsedPayload.name = getJsonValue(payload, "name");
     console.log("parsedPayload :", parsedPayload);
 }
 
-const getJsonValue = (name) => {
+const getJsonValue = (payload, name) => {
     const quotaiton = `\"`;
     const searchStr = `\"${name}\":`;
     
