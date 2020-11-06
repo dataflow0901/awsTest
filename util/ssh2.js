@@ -146,7 +146,7 @@ const executeCommand = (command, options) => {
                 // endConn();
             }).stderr.on("data", (data)=>{
                 console.log("STDERR: ", data.toString());
-                endConn();
+                // endConn();
             })
 
             const endConn = () => {
