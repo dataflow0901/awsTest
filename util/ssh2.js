@@ -193,7 +193,8 @@ const executeCommand = (command, options) => {
             }).stderr.on("data", (data)=>{
                 console.log("STDERR: ", data.toString());
                 if(data.includes("payload:\"")){
-                    parser.getPayload(data.toString());
+                    const payload = parser.getPayload(data.toString());
+                    console.log("returned payload: ", payload);
                 }
             })
 
