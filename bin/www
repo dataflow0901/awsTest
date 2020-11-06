@@ -77,7 +77,6 @@ function onError(error) {
   }
 }
 
-
 process.on("SIGUSR2", () => {
   server.close(function () {
       process.kill(process.pid, "SIGUSR2");
