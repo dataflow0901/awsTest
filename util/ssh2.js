@@ -112,6 +112,7 @@ module.exports.createAccount = (data) => {
 
 module.exports.createLog = (data) => {
     const comman = `
+        source ~/.bash_profile;
         docker exec -e "CORE_PEER_TLS_ENABLED=true" \
         -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/home/managedblockchain-tls-chain.pem"  \
         -e "CORE_PEER_LOCALMSPID=$MSP" \
@@ -142,6 +143,7 @@ module.exports.queryAccount = (data) => {
 
 module.exports.createLog = (data) => {
     const comman = `
+        source ~/.bash_profile;
         docker exec -e "CORE_PEER_TLS_ENABLED=true" \
         -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/home/managedblockchain-tls-chain.pem"  \
         -e "CORE_PEER_LOCALMSPID=$MSP" \
