@@ -1,6 +1,6 @@
 const Client = require('ssh2').Client;
-const { SSL_OP_PKCS1_CHECK_2 } = require('constants');
 const path = require('path');
+const parser = require('./resultParser');
 
 const ubuntu = {
     host: '112.217.209.162',
@@ -146,6 +146,9 @@ const executeCommand = (command, options) => {
                 endConn();
             }).stderr.on("data", (data)=>{
                 console.log("STDERR: ", data.toString());
+                if(data.contains("payload:\"")){
+                    parser.getPayload(data.toString());
+                }
                 // endConn();
             })
 
