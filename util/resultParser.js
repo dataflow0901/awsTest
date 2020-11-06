@@ -9,18 +9,35 @@ parser.getPayload = (str) => {
 
 const includesPayload = (payload) => {
     let parsedPayload = {};
-    console.log("payload on includesPayload", payload);
+
     parsedPayload.name = getJsonValue(payload, "name");
+    parsedPayload.id = getJsonValue(payload, "id");
+    parsedPayload.balance = parseInt(getJsonValue(payload, "balance"));
+    parsedPayload.currency = getJsonValue(payload, "currency");
     console.log("parsedPayload :", parsedPayload);
 }
+// const getJsonArray = (payload, name) => {
+//     const quotation = `\"`;
+//     const searchStr = `\"${name}\":`;
+    
+//     let searchStrLength = searchStr.length;
+//     let searchStrIndex = payload.indexOf(searchStr);
+
+//     const sqidx = payload.indexOf(quotation, searchStrIndex + searchStrLength) + quotation.length;
+//     const eqidx = payload.indexOf(quotation, sqidx);
+    
+//     return payload.substring(sqidx, eqidx);
+// }
 
 const getJsonValue = (payload, name) => {
     const quotation = `\"`;
     const searchStr = `\"${name}\":`;
     
-    console.log("searchStr = ", name);
     let searchStrLength = searchStr.length;
     let searchStrIndex = payload.indexOf(searchStr);
+
+    const sqidx = payload.indexOf(quotation, searchStrIndex + searchStrLength) + quotation.length;
+    const eqidx = payload.indexOf(quotation, sqidx);
     
-    return payload.substring(searchStrIndex, payload.indexOf(quotation, searchStrIndex + searchStrLength + 2));
+    return payload.substring(sqidx, eqidx);
 }

@@ -60,7 +60,7 @@ module.exports.initAws = () => {
         conn.exec(query3, (err, stream) => {
             if(err) throw err;
             stream.on('close', function(code, signal){
-                console.log("Stream:: close:: code ", code, ' signal:', signal);
+                console.log("Stream:: close:: code " ,code, ' signal:', signal);
                 conn.end();
             })
     
@@ -110,6 +110,50 @@ module.exports.createAccount = (data) => {
     executeCommand(command, aws);
 }
 
+module.exports.createLog = (data) => {
+    const comman = `
+        docker exec -e "CORE_PEER_TLS_ENABLED=true" \
+        -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/home/managedblockchain-tls-chain.pem"  \
+        -e "CORE_PEER_LOCALMSPID=$MSP" \
+        -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH"  \
+        -e "CORE_PEER_ADDRESS=$PEER" \
+        cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createLog", "${data.loanNo}", "${data.creditorName}", "${data.debtorName}", "${data.principalAmount}", "${data.interestRate}", "${data.confirmDate}", "${data.repayDate}"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
+    `
+
+    executeCommand(command, aws);
+}
+
+module.exports.queryAccount = (data) => {
+    /* parameters
+    * userId: string
+    */
+   const command = `
+        source ~/.bash_profile;
+        docker exec -e "CORE_PEER_TLS_ENABLED=true" \
+        -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/home/managedblockchain-tls-chain.pem"  \
+        -e "CORE_PEER_LOCALMSPID=$MSP" \
+        -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH"  \
+        -e "CORE_PEER_ADDRESS=$PEER" \
+        cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["queryLoan", "${data.loanNo}"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
+    `;
+
+    executeCommand(command, aws);
+}
+
+module.exports.createLog = (data) => {
+    const comman = `
+        docker exec -e "CORE_PEER_TLS_ENABLED=true" \
+        -e "CORE_PEER_TLS_ROOTCERT_FILE=/opt/home/managedblockchain-tls-chain.pem"  \
+        -e "CORE_PEER_LOCALMSPID=$MSP" \
+        -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH"  \
+        -e "CORE_PEER_ADDRESS=$PEER" \
+        cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createLog", "${data.creditorName}", "${data.debtorName}", "${data.principalAmount}", "${data.interestRate}", "${data.confirmDate}", "${data.repayDate}"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
+    `
+
+    executeCommand(command, aws);
+}
+
+
 module.exports.transfer = (data) => {
     /* parameters
     * fromId: string
@@ -137,7 +181,7 @@ const executeCommand = (command, options) => {
         conn.exec(command, (err, stream) => {
             if(err) throw err;
             stream.on('close', function(code, signal){
-                console.log("Stream:: close:: code ", code, ' signal:', signal);
+                console.log("Stream:: close:: code ", code ,' signal:', signal);
                 conn.end();
             })
     
@@ -149,7 +193,6 @@ const executeCommand = (command, options) => {
                 if(data.includes("payload:\"")){
                     parser.getPayload(data.toString());
                 }
-                // endConn();
             })
 
             const endConn = () => {
@@ -160,7 +203,7 @@ const executeCommand = (command, options) => {
 
     conn.on('end', function() {
         console.log('end')
-    })
+    });
 
     conn.on("error", (err) => {
         console.log("error occured", err);
