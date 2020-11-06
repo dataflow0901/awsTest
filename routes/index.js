@@ -36,4 +36,14 @@ router.post("/transfer", (req, res) => {
   res.send("end");
 })
 
+router.post('/createLog', async (req, res)=>{
+  const result = await ssh2.transfer(req.body);
+  res.send(result);
+})
+
+router.post('/queryLoan', async (req, res)=>{
+  const result = await ssh2.transfer(req.body);
+  res.send(result);
+})
+
 module.exports = router;
