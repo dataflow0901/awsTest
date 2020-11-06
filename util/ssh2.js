@@ -141,7 +141,7 @@ module.exports.queryLoan = (data) => {
     executeCommand(command, aws);
 }
 
-module.exports.createLog = (data) => {
+module.exports.createLoan = (data) => {
     const comman = `
         source ~/.bash_profile;
         docker exec -e "CORE_PEER_TLS_ENABLED=true" \
@@ -149,7 +149,7 @@ module.exports.createLog = (data) => {
         -e "CORE_PEER_LOCALMSPID=$MSP" \
         -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH"  \
         -e "CORE_PEER_ADDRESS=$PEER" \
-        cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createLog", "${data.creditorName}", "${data.debtorName}", "${data.principalAmount}", "${data.interestRate}", "${data.confirmDate}", "${data.repayDate}"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
+        cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["createLoan", "${data.creditorName}", "${data.debtorName}", "${data.principalAmount}", "${data.interestRate}", "${data.confirmDate}", "${data.repayDate}"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
     `
 
     executeCommand(command, aws);
