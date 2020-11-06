@@ -124,7 +124,7 @@ module.exports.createLog = (data) => {
     executeCommand(command, aws);
 }
 
-module.exports.queryAccount = (data) => {
+module.exports.queryLoan = (data) => {
     /* parameters
     * userId: string
     */
