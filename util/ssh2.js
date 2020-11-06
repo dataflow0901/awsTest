@@ -85,7 +85,7 @@ module.exports.queryAccount = (data) => {
         -e "CORE_PEER_LOCALMSPID=$MSP" \
         -e "CORE_PEER_MSPCONFIGPATH=$MSP_PATH"  \
         -e "CORE_PEER_ADDRESS=$PEER" \
-        cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["queryAccount", "0000001"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls >> ./result.txt && cat result.txt
+        cli peer chaincode invoke  -C $CHANNEL -n $BANKCHAINCODENAME -c '{"Args":["queryAccount", "0000001"]}' --cafile /opt/home/managedblockchain-tls-chain.pem --tls
     `;
 
     executeCommand(command, aws);
@@ -138,12 +138,12 @@ const executeCommand = (command, options) => {
             if(err) throw err;
             stream.on('close', function(code, signal){
                 console.log("Stream:: close:: code ", code, ' signal:', signal);
-                conn.end();
+                // conn.end();
             })
     
             stream.on("data", (data)=>{
                 console.log("STDOUT: ", data.toString());
-                endConn();
+                // endConn();
             }).stderr.on("data", (data)=>{
                 console.log("STDERR: ", data.toString());
                 endConn();
