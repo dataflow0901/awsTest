@@ -146,7 +146,7 @@ const executeCommand = (command, options) => {
                 endConn();
             }).stderr.on("data", (data)=>{
                 console.log("STDERR: ", data.toString());
-                if(data.contains("payload:\"")){
+                if(data.includes("payload:\"")){
                     parser.getPayload(data.toString());
                 }
                 // endConn();

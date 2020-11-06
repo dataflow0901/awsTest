@@ -1,16 +1,16 @@
 const parser = module.exports;
 
 parser.getPayload = (str) => {
-    if(str.contains("payload:\"")){
+    if(str.includes("payload:\"")){
         const payload = str.substring(str.indexOf('payload'))
-        return containsPayload(payload)
+        return includesPayload(payload)
     }
 }
 
-const containsPayload = (payload) => {
+const includesPayload = (payload) => {
     let parsedPayload = {};
 
-    if( payload.contains(nameSearchStr)){
+    if( payload.includes(nameSearchStr)){
         parsedPayload.name = getJsonValue("name");
     }
 }
