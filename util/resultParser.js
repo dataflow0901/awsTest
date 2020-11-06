@@ -9,7 +9,7 @@ parser.getPayload = (str) => {
 
 const includesPayload = (payload) => {
     let parsedPayload = {};
-
+    console.log("payload on includesPayload", payload);
     parsedPayload.name = getJsonValue(payload, "name");
     console.log("parsedPayload :", parsedPayload);
 }
