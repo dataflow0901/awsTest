@@ -11,7 +11,7 @@ const includesPayload = (payload) => {
     let parsedPayload = {};
 
     parsedPayload.name = getJsonValue("name");
-
+    console.log("parsedPayload :", parsedPayload);
 }
 
 const getJsonValue = (name) => {
@@ -19,9 +19,8 @@ const getJsonValue = (name) => {
     const searchStr = `\"${name}\":`;
     
     console.log("searchStr = ", name);
-    // let searchStrLength = nameSearchStr.length;
-    // let nameIndex = payload.indexOf(nameSearchStr);
-    // const name = payload.substring(nameIndex, payload.indexOf(quotation, nameIndex + 2))
-    // parsedPayload.name = 
-
+    let searchStrLength = searchStr.length;
+    let nameIndex = payload.indexOf(searchStr);
+    
+    return payload.substring(nameIndex, payload.indexOf(quotation, nameIndex + nameStrlength + 2));
 }
