@@ -32,7 +32,7 @@ const includesPayload = (payload) => {
 
 const getJsonValue = (payload, name) => {
     const quotation = "\"";
-    const searchStr = "\"" + name +"\":";
+    const searchStr = "\\\"" + name +"\\\":";
     
     let searchStrLength = searchStr.length;
     let searchStrIndex = payload.indexOf(searchStr);
