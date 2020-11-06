@@ -10,7 +10,7 @@ parser.getPayload = (str) => {
 
 const includesPayload = (payload) => {
     let parsedPayload = {};
-
+    console.log("payload on includesPayload", payload);
     parsedPayload.name = getJsonValue(payload, "name");
     parsedPayload.id = getJsonValue(payload, "id");
     parsedPayload.balance = parseInt(getJsonValue(payload, "balance"));
