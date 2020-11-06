@@ -15,7 +15,7 @@ const includesPayload = (payload) => {
 }
 
 const getJsonValue = (payload, name) => {
-    const quotaiton = `\"`;
+    const quotation = `\"`;
     const searchStr = `\"${name}\":`;
     
     console.log("searchStr = ", name);
