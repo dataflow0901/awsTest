@@ -16,7 +16,7 @@ const includesPayload = (payload) => {
     parsedPayload.currency = getJsonValue(payload, "currency");
     console.log("parsedPayload :", parsedPayload);
 
-    return payload;
+    return parsedPayload;
 }
 
 // const getJsonArray = (payload, name) => {
