@@ -10,13 +10,15 @@ parser.getPayload = (str) => {
 
 const includesPayload = (payload) => {
     let parsedPayload = {};
-    console.log("payload on includesPayload", payload);
     parsedPayload.name = getJsonValue(payload, "name");
     parsedPayload.id = getJsonValue(payload, "id");
     parsedPayload.balance = parseInt(getJsonValue(payload, "balance"));
     parsedPayload.currency = getJsonValue(payload, "currency");
     console.log("parsedPayload :", parsedPayload);
+
+    return payload;
 }
+
 // const getJsonArray = (payload, name) => {
 //     const quotation = `\"`;
 //     const searchStr = `\"${name}\":`;
@@ -39,10 +41,6 @@ const getJsonValue = (payload, name) => {
     
     const sqidx = payload.indexOf(quotation, searchStrIndex + searchStrLength) + quotation.length;
     const eqidx = payload.indexOf(quotation, sqidx);
-    console.log(`getJsonValue: 
-        payload -> ${payload}, searchStr -> ${searchStr}, quotation -> ${quotation}
-        searchStrLength -> ${searchStrLength}, searchStrIndex -> ${searchStrIndex}
-        sqidx -> ${sqidx}, eqidx -> ${eqidx}`)
-    
+
     return payload.substring(sqidx, eqidx);
 }
