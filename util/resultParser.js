@@ -20,7 +20,7 @@ const getJsonValue = (payload, name) => {
     
     console.log("searchStr = ", name);
     let searchStrLength = searchStr.length;
-    let nameIndex = payload.indexOf(searchStr);
+    let searchStrIndex = payload.indexOf(searchStr);
     
-    return payload.substring(nameIndex, payload.indexOf(quotation, nameIndex + nameStrlength + 2));
+    return payload.substring(nameIndex, payload.indexOf(quotation, searchStrIndex + searchStrLength + 2));
 }
